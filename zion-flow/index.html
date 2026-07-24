@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zion Flow — Reservations Operating System</title>
+  <meta name="description" content="Centralize every reservation in one elegant place." />
+  <meta name="theme-color" content="#f5f3f0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- MAIN APP -->
+  <div class="app">
+    <!-- TOP NAVIGATION -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="header-title">Zion Flow</h1>
+        <button class="header-btn" aria-label="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- SCREEN: DASHBOARD -->
+    <div class="content screen active" id="screen-dashboard">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <div class="page-header-top">
+          <div>
+            <p class="page-label">SERVICE BOOK</p>
+            <h2 class="page-title">Friday Evening</h2>
+          </div>
+          <div class="page-date">JUNE 21</div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <p class="kpi-label">RESERVATIONS</p>
+            <p class="kpi-value">23</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">GUESTS</p>
+            <p class="kpi-value">87</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">NEXT ARRIVAL</p>
+            <p class="kpi-value">18:30</p>
+          </div>
+          <div class="kpi-card">
+            <p class="kpi-label">PENDING</p>
+            <p class="kpi-value">4</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FILTERS -->
+      <div class="filters">
+        <button class="filter-btn active" data-status="all">All</button>
+        <button class="filter-btn" data-status="confirmed">Confirmed</button>
+        <button class="filter-btn" data-status="seated">Seated</button>
+      </div>
+
+      <!-- RESERVATIONS LIST -->
+      <section class="reservations">
+        <div class="reservation-item" data-guest-name="Julianne Moore" data-guests="4">
+          <div class="reservation-time">18:30</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Julianne Moore</p>
+            <p class="reservation-details">4 guests · <span class="reservation-table">Table 12</span> · Anniversary</p>
+          </div>
+          <span class="reservation-status confirmed">CONFIRMED</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+
+        <div class="reservation-item" data-guest-name="Marcus Aurelius" data-guests="2">
+          <div class="reservation-time">18:45</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Marcus Aurelius</p>
+            <p class="reservation-details">2 guests · <span class="reservation-table">Bar 04</span> · Regular</p>
+          </div>
+          <span class="reservation-status seated">SEATED</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+
+        <div class="reservation-item" data-guest-name="Elena Ferrante" data-guests="6">
+          <div class="reservation-time">19:00</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Elena Ferrante</p>
+            <p class="reservation-details">6 guests · <span class="reservation-table">Table 22</span> · Allergy</p>
+          </div>
+          <span class="reservation-status arriving">ARRIVING</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+
+        <div class="reservation-item" data-guest-name="Adaeze Okafor" data-guests="2">
+          <div class="reservation-time">19:15</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Adaeze Okafor</p>
+            <p class="reservation-details">2 guests · <span class="reservation-table">Table 07</span> · First visit</p>
+          </div>
+          <span class="reservation-status confirmed">CONFIRMED</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+
+        <div class="reservation-item" data-guest-name="Ren Tanaka" data-guests="3">
+          <div class="reservation-time">19:30</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Ren Tanaka</p>
+            <p class="reservation-details">3 guests · <span class="reservation-table">Booth B</span> · Press</p>
+          </div>
+          <span class="reservation-status confirmed">CONFIRMED</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+
+        <div class="reservation-item" data-guest-name="Sarah Chen" data-guests="4">
+          <div class="reservation-time">20:00</div>
+          <div class="reservation-main">
+            <p class="reservation-name">Sarah Chen</p>
+            <p class="reservation-details">4 guests · <span class="reservation-table">Table 18</span> · Regular</p>
+          </div>
+          <span class="reservation-status confirmed">CONFIRMED</span>
+          <button class="btn-edit-reservation">✎ Editar</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCREEN: GUESTS -->
+    <div class="content screen" id="screen-guests">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <div class="page-header-top">
+          <div>
+            <p class="page-label">THE LEDGER</p>
+            <h2 class="page-title">Guests</h2>
+          </div>
+        </div>
+        <p class="page-subtitle">Your community of diners</p>
+      </section>
+
+      <!-- SEARCH BAR -->
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search guests..." />
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <!-- GUESTS LIST -->
+      <section class="guests-list">
+        <div class="guest-item" data-guest="sarah">
+          <p class="guest-item-name">Sarah Chen <span class="vip-badge">VIP</span></p>
+        </div>
+
+        <div class="guest-item" data-guest="julianne">
+          <p class="guest-item-name">Julianne Moore <span class="vip-badge">VIP</span></p>
+        </div>
+
+        <div class="guest-item" data-guest="elena">
+          <p class="guest-item-name">Elena Ferrante <span class="vip-badge">VIP</span></p>
+        </div>
+
+        <div class="guest-item" data-guest="ren">
+          <p class="guest-item-name">Ren Tanaka</p>
+        </div>
+
+        <div class="guest-item" data-guest="marcus">
+          <p class="guest-item-name">Marcus Aurelius</p>
+        </div>
+
+        <div class="guest-item" data-guest="adaeze">
+          <p class="guest-item-name">Adaeze Okafor</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCREEN: GUEST PROFILE -->
+    <div class="content screen" id="screen-guest-profile">
+      <!-- BACK BUTTON -->
+      <div class="profile-header">
+        <button class="back-btn" id="back-from-profile">← Back</button>
+      </div>
+
+      <!-- GUEST INFO -->
+      <section class="guest-profile">
+        <div class="profile-name-section">
+          <h2 class="profile-name" id="profile-guest-name">Sarah Chen</h2>
+          <span class="profile-badge" id="profile-guest-badge">VIP</span>
+        </div>
+
+        <!-- CONTACT INFORMATION -->
+        <div class="profile-card">
+          <div class="contact-item">
+            <p class="contact-label">PHONE</p>
+            <p class="contact-value" id="profile-phone">+1 (415) 555-0123</p>
+          </div>
+
+          <div class="contact-item">
+            <p class="contact-label">EMAIL</p>
+            <p class="contact-value" id="profile-email">sarah.chen@email.com</p>
+          </div>
+        </div>
+
+        <!-- RESERVATION NOTES -->
+        <div class="profile-card notes-card">
+          <p class="notes-label">RESERVATION NOTES</p>
+          <p class="reservation-notes" id="profile-notes">
+            We are celebrating our anniversary. Please surprise us with champagne if possible. We are looking forward to an unforgettable evening!
+          </p>
+        </div>
+
+        <!-- ACTIVE RESERVATION -->
+        <div class="profile-card reservation-card" id="profile-reservation-card" style="display: none;">
+          <p class="notes-label">ACTIVE RESERVATION</p>
+          <div class="reservation-details">
+            <div class="reservation-detail-row">
+              <span class="detail-label">TIME</span>
+              <span class="detail-value" id="profile-reservation-time">18:30</span>
+            </div>
+            <div class="reservation-detail-row">
+              <span class="detail-label">GUESTS</span>
+              <span class="detail-value" id="profile-reservation-guests">4</span>
+            </div>
+            <div class="reservation-detail-row">
+              <span class="detail-label">TABLE</span>
+              <span class="detail-value" id="profile-reservation-table">Table 12</span>
+            </div>
+            <div class="reservation-detail-row">
+              <span class="detail-label">STATUS</span>
+              <span class="detail-value detail-status" id="profile-reservation-status">CONFIRMED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NO RESERVATION MESSAGE -->
+        <div class="profile-card no-reservation-card" id="profile-no-reservation" style="display: none;">
+          <p class="no-reservation-text">No active reservations</p>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="profile-actions">
+          <button class="action-btn primary-btn">Edit Profile</button>
+          <button class="action-btn secondary-btn">View Reservation</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCREEN: FLOOR (SEATING CHART) -->
+    <div class="content screen" id="screen-floor">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <div>
+          <p class="page-label">FLOOR PLAN</p>
+          <h2 class="page-title">Floor Overview</h2>
+        </div>
+      </section>
+
+      <!-- TABS -->
+      <div class="floor-tabs">
+        <button class="floor-tab active" data-tab="floor">Floor</button>
+        <button class="floor-tab" data-tab="tables">Tables</button>
+        <button class="floor-tab" data-tab="booths">Booths</button>
+        <button class="floor-tab" data-tab="areas">Areas</button>
+      </div>
+
+      <!-- LEGEND -->
+      <div class="floor-legend-inline">
+        <div class="legend-dot available"></div>
+        <span>Available</span>
+        <div class="legend-dot reserved"></div>
+        <span>Reserved</span>
+        <div class="legend-dot occupied"></div>
+        <span>Occupied</span>
+        <div class="legend-dot out-of-service"></div>
+        <span>Out of Service</span>
+      </div>
+
+      <!-- FLOOR PLAN VISUAL -->
+      <div class="floor-diagram">
+        <!-- SEA VIEW HEADER -->
+        <div class="sea-view">🌊 SEA VIEW</div>
+
+        <!-- TERRACE NON-SMOKING -->
+        <div class="terrace-section non-smoking">
+          <div class="terrace-header">
+            <div class="terrace-label">TERRACE – NON SMOKING</div>
+            <button class="btn-add-table" data-section="terrace-non-smoking">+</button>
+          </div>
+          <div class="tables-grid terrace-grid" data-section="terrace-non-smoking">
+            <div class="table-item available" data-table="T1" data-guests="2-4">
+              <div class="table-circle">T1</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item available" data-table="T2" data-guests="2-4">
+              <div class="table-circle">T2</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item reserved" data-table="T3" data-guests="4">
+              <div class="table-circle">T3</div>
+              <div class="table-capacity">4</div>
+            </div>
+            <div class="table-item available" data-table="T4" data-guests="2-4">
+              <div class="table-circle">T4</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item available" data-table="T5" data-guests="2-4">
+              <div class="table-circle">T5</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item available" data-table="T6" data-guests="4-6">
+              <div class="table-circle">T6</div>
+              <div class="table-capacity">4-6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERRACE SMOKING -->
+        <div class="terrace-section smoking">
+          <div class="terrace-header">
+            <div class="terrace-label">TERRACE – SMOKING</div>
+            <button class="btn-add-table" data-section="terrace-smoking">+</button>
+          </div>
+          <div class="tables-grid terrace-grid" data-section="terrace-smoking">
+            <div class="table-item available" data-table="T7" data-guests="2-4">
+              <div class="table-circle">T7</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item reserved" data-table="T8" data-guests="4">
+              <div class="table-circle">T8</div>
+              <div class="table-capacity">4</div>
+            </div>
+            <div class="table-item occupied" data-table="T9" data-guests="6-8" data-guest="John & Friends">
+              <div class="table-circle large">T9</div>
+              <div class="table-capacity">6-8</div>
+            </div>
+            <div class="table-item available" data-table="T10" data-guests="2-4">
+              <div class="table-circle">T10</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item reserved" data-table="T11" data-guests="4">
+              <div class="table-circle">T11</div>
+              <div class="table-capacity">4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESTAURANT INDOOR -->
+        <div class="restaurant-section">
+          <div class="entrance">
+            🔻 ENTRANCE
+          </div>
+          <div class="terrace-header">
+            <div class="restaurant-label">RESTAURANT – INDOOR NON SMOKING</div>
+            <button class="btn-add-table" data-section="restaurant-indoor">+</button>
+          </div>
+          <div class="tables-grid restaurant-grid" data-section="restaurant-indoor">
+            <div class="table-item available" data-table="R1" data-guests="2-4">
+              <div class="table-circle">R1</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item reserved" data-table="R2" data-guests="4">
+              <div class="table-circle">R2</div>
+              <div class="table-capacity">4</div>
+            </div>
+            <div class="table-item available" data-table="R3" data-guests="2-4">
+              <div class="table-circle">R3</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item occupied" data-table="R4" data-guests="6-8" data-guest="Sarah Chen">
+              <div class="table-circle large">R4</div>
+              <div class="table-capacity">6-8</div>
+            </div>
+            <div class="table-item available" data-table="R5" data-guests="2-4">
+              <div class="table-circle">R5</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item reserved" data-table="R6" data-guests="4">
+              <div class="table-circle">R6</div>
+              <div class="table-capacity">4</div>
+            </div>
+            <div class="table-item available" data-table="R7" data-guests="2-4">
+              <div class="table-circle">R7</div>
+              <div class="table-capacity">2-4</div>
+            </div>
+            <div class="table-item occupied" data-table="R8" data-guests="4-6" data-guest="Elena Ferrante">
+              <div class="table-circle">R8</div>
+              <div class="table-capacity">4-6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KITCHEN AREA -->
+        <div class="kitchen-area">👨‍🍳 KITCHEN</div>
+      </div>
+
+      <!-- TABLE EDIT MODAL -->
+      <div class="table-modal-overlay" id="table-modal-overlay">
+        <div class="table-modal">
+          <div class="modal-header">
+            <h3 id="modal-title">Edit Table</h3>
+            <button class="modal-close" id="modal-close">✕</button>
+          </div>
+          <div class="modal-content">
+            <div class="form-group">
+              <label>Table Name/Number</label>
+              <input type="text" id="table-name" placeholder="e.g., T1, R4, Booth A">
+            </div>
+            <div class="form-group">
+              <label>Capacity</label>
+              <input type="text" id="table-capacity" placeholder="e.g., 2-4, 4, 6-8">
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="table-status">
+                <option value="available">Available</option>
+                <option value="reserved">Reserved</option>
+                <option value="occupied">Occupied</option>
+                <option value="out-of-service">Out of Service</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Section</label>
+              <select id="table-section">
+                <option value="terrace-non-smoking">Terrace – Non Smoking</option>
+                <option value="terrace-smoking">Terrace – Smoking</option>
+                <option value="restaurant-indoor">Restaurant – Indoor</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn-cancel" id="btn-cancel">Cancel</button>
+            <button class="btn-save" id="btn-save">Save</button>
+            <button class="btn-delete" id="btn-delete" style="display:none;">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLE DETAIL MODAL -->
+      <div class="table-detail-panel" id="table-detail-panel">
+        <div class="detail-header">
+          <div class="detail-table-badge" id="detail-table-id">T9</div>
+          <button class="detail-close">✕</button>
+        </div>
+        <div class="detail-status" id="detail-status">Occupied</div>
+        <div class="detail-content">
+          <div class="detail-row">
+            <span class="detail-icon">👤</span>
+            <span id="detail-guest">John & Friends</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">🕐</span>
+            <span id="detail-time">19:30</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">👥</span>
+            <span id="detail-guests">7 Guests</span>
+          </div>
+        </div>
+        <div class="detail-actions">
+          <button class="action-btn-small">Seat Guest</button>
+          <button class="action-btn-small">Move Table</button>
+          <button class="action-btn-small">Free Table</button>
+          <button class="action-btn-small">More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN: ACTIVITY -->
+    <div class="content screen" id="screen-messages">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <div class="page-header-top">
+          <div>
+            <p class="page-label">RESTAURANT TIMELINE</p>
+            <h2 class="page-title">Activity</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVITY TIMELINE -->
+      <section class="activity-timeline">
+        <!-- Activity Card: Special Request -->
+        <div class="activity-card highlight">
+          <div class="activity-icon">⭐</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Special Request</h3>
+            <p class="activity-description">Elena Ferrante — Allergic to peanuts, please prepare separately</p>
+            <span class="activity-time">Just now</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: Guest Seated -->
+        <div class="activity-card">
+          <div class="activity-icon">👥</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Guest Seated</h3>
+            <p class="activity-description">Julianne Moore — Table 12 (4 guests)</p>
+            <span class="activity-time">2 min ago</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: Reservation Updated -->
+        <div class="activity-card">
+          <div class="activity-icon">✏️</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Reservation Updated</h3>
+            <p class="activity-description">Sarah Chen — Changed from 6 to 8 guests for tonight</p>
+            <span class="activity-time">5 min ago</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: Upcoming Arrival -->
+        <div class="activity-card upcoming">
+          <div class="activity-icon">🔔</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Upcoming Arrival</h3>
+            <p class="activity-description">Marcus Aurelius — Arriving in 10 minutes for 19:30 reservation</p>
+            <span class="activity-time">Today 19:20</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: New Reservation -->
+        <div class="activity-card">
+          <div class="activity-icon">➕</div>
+          <div class="activity-content">
+            <h3 class="activity-title">New Reservation</h3>
+            <p class="activity-description">Ren Tanaka — 3 guests, 20:00, Table 15</p>
+            <span class="activity-time">Today 18:45</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: Table Released -->
+        <div class="activity-card">
+          <div class="activity-icon">🗝️</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Table Released</h3>
+            <p class="activity-description">Table 8 — Guests departed, table ready for next seating</p>
+            <span class="activity-time">Today 18:30</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: Reservation Cancelled -->
+        <div class="activity-card alert">
+          <div class="activity-icon">❌</div>
+          <div class="activity-content">
+            <h3 class="activity-title">Reservation Cancelled</h3>
+            <p class="activity-description">Adaeze Okafor — Cancelled reservation for 2 guests at 19:00</p>
+            <span class="activity-time">Today 17:15</span>
+          </div>
+        </div>
+
+        <!-- Activity Card: New Reservation -->
+        <div class="activity-card">
+          <div class="activity-icon">➕</div>
+          <div class="activity-content">
+            <h3 class="activity-title">New Reservation</h3>
+            <p class="activity-description">Anna García — 6 guests, 20:30, Table 6</p>
+            <span class="activity-time">Today 14:22</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCREEN: ADMIN -->
+    <div class="content screen" id="screen-admin">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <div class="page-header-top">
+          <div>
+            <p class="page-label">HOUSE SETTINGS</p>
+            <h2 class="page-title">Admin</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADMIN SECTIONS -->
+      <div class="admin-content">
+        <div class="admin-section">
+          <h3>Restaurant Profile</h3>
+          <div class="setting-item">
+            <label>Restaurant Name</label>
+            <p>Zion Flow Restaurant</p>
+          </div>
+          <div class="setting-item">
+            <label>Address</label>
+            <p>123 Coastal Road, San Francisco, CA 94107</p>
+          </div>
+          <div class="setting-item">
+            <label>Phone</label>
+            <p>+1 (415) 555-0199</p>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Service Hours</h3>
+          <div class="setting-item">
+            <label>Lunch Service</label>
+            <p>11:30 AM - 2:30 PM</p>
+          </div>
+          <div class="setting-item">
+            <label>Dinner Service</label>
+            <p>5:30 PM - 11:00 PM</p>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Reservation Settings</h3>
+          <div class="setting-item">
+            <label>Default Turn Time</label>
+            <p>90 minutes</p>
+          </div>
+          <div class="setting-item">
+            <label>Waitlist Hold Time</label>
+            <p>15 minutes</p>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Preferences</h3>
+          <div class="setting-item">
+            <label>Language</label>
+            <p>English</p>
+          </div>
+          <div class="setting-item">
+            <label>Theme</label>
+            <p>Light</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESERVATION MODAL -->
+    <div class="table-modal-overlay" id="reservation-modal-overlay">
+      <div class="table-modal">
+        <div class="modal-header">
+          <h3 id="reservation-modal-title">New Reservation</h3>
+          <button class="modal-close" id="reservation-modal-close">✕</button>
+        </div>
+        <div class="modal-content">
+          <div class="form-group">
+            <label>Guest Name</label>
+            <input type="text" id="reservation-name" placeholder="e.g., John Smith">
+          </div>
+          <div class="form-group">
+            <label>Number of Guests</label>
+            <input type="number" id="reservation-guests" placeholder="e.g., 4" min="1">
+          </div>
+          <div class="form-group">
+            <label>Reservation Time</label>
+            <input type="time" id="reservation-time" placeholder="e.g., 19:30">
+          </div>
+          <div class="form-group">
+            <label>Table Number</label>
+            <input type="text" id="reservation-table" placeholder="e.g., T1, R4">
+          </div>
+          <div class="form-group">
+            <label>Special Notes</label>
+            <textarea id="reservation-notes" placeholder="e.g., Celebrating anniversary, allergies..." style="min-height: 80px; resize: vertical;"></textarea>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" id="reservation-cancel">Cancel</button>
+          <button class="btn-save" id="reservation-save">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE SELECTION MODAL FOR RESERVATION EDITING -->
+    <div class="table-modal-overlay" id="table-selection-modal">
+      <div class="table-modal">
+        <div class="modal-header">
+          <h3>Seleccionar Mesa</h3>
+          <button class="modal-close" id="table-selection-close">✕</button>
+        </div>
+        <div class="modal-content">
+          <div class="form-group">
+            <label>Área del Restaurante</label>
+            <select id="area-selector">
+              <option value="">-- Seleccionar Área --</option>
+              <option value="terrace-non-smoking">Terraza – Sin Fumar</option>
+              <option value="terrace-smoking">Terraza – Fumadores</option>
+              <option value="restaurant-indoor">Restaurante – Interior</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mesas Disponibles</label>
+            <div id="available-tables" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+              <!-- Tables will be populated here by JavaScript -->
+            </div>
+          </div>
+          <div class="form-group">
+            <p><strong>Mesa Seleccionada:</strong> <span id="selected-table-display">Ninguna</span></p>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" id="table-selection-cancel">Cancelar</button>
+          <button class="btn-save" id="table-selection-save">Guardar Mesa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING ACTION BUTTON -->
+    <button class="fab" id="fab-btn" aria-label="Add reservation">+</button>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active" aria-label="Today">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">TODAY</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Guests">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">GUESTS</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Floor">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">FLOOR</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Messages">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">MSG</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Admin">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">ADMIN</span>
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    console.log('HTML loaded, app.js about to load');
+  </script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+  <script>
+    console.log('app.js loaded');
+  </script>
+</body>
+</html>
