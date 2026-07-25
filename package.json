@@ -1,0 +1,6 @@
+{
+  "name": "restaurant-website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  }
+}
