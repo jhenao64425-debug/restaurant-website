@@ -1,0 +1,12 @@
+name = "restaurante-web"
+type = "javascript"
+main = "src/index.js"
+site = { include = ["zion-oasis-web"] }
+
+[build]
+command = ""
+cwd = "."
+watch_paths = ["zion-oasis-web/**/*.{html,css,js,jpg,png,mp4}"]
+
+[env.production]
+name = "restaurante-web"
